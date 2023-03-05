@@ -118,6 +118,17 @@ body{
     transition: 0.5s;
 }
 
+.form-control{
+    width: 70%;
+    height: 28px;
+    background: transparent;
+    border: 1px solid black;
+    border-radius: 10px;
+    color: white;
+    padding: 0 15px;
+    font-weight: 400;
+}
+
 .btn{
     font-size: 15px;
     font-weight: 400;

@@ -7,12 +7,12 @@ if(parentList.children[0].className == "emptyList"){
 }
 let currentBtn = e.currentTarget
 let currentIuput = currentBtn.previousElementSibling
-let currentChapter = currentIuput.value
+let currentTodo = currentIuput.value
 
 
 let newLi = document.createElement('li')
 newLi.className = "list-group-item"
-newLi.innerHTML = `<h3 class = "flex-grow-1">${currentChapter}</h3> 
+newLi.innerHTML = `<h3 class = "flex-grow-1">${currentTodo}</h3> 
         <div><button class = "btn btn-warning" onclick = "editTodo(this)">Edit</button>
         <button class = "btn btn-danger" onclick="removeTodo(this)" >Remove</button></div>`
 
@@ -20,34 +20,29 @@ parentList.appendChild(newLi)
 }
 
 function removeTodo(currElement){
-    currElement.parentElement.remove()
-    if(parentList.children.length <= 0){
-        let newEmptyMsg = document.createElement("h3")
-        newEmptyMsg.classList.add("emptyList")
-        newEmptyMsg.textContent = "Nothing is Here!! Please add new Chapter"
-        parentList.appendChild(newEmptyMsg)
-    }
+    currElement.parentElement.parentElement.remove()
 }
 
 function editTodo(currElement){
     if(currElement.textContent == "Done"){
         currElement.textContent = "Edit"
-        let currChapterName = currElement.previousElementSibling.value
+        console.log(currElement.parentElement.previousElementSibling.value)
+        let currTodoName = currElement.parentElement.previousElementSibling.value
         let currHeading = document.createElement("h3")
         currHeading.className = "flex-grow-1"
-        currHeading.textContent = currChapterName
+        currHeading.textContent = currTodoName
 
-        currElement.parentElement.replaceChild(currHeading,currElement.previousElementSibling)
+        currElement.parentElement.parentElement.replaceChild(currHeading,currElement.parentElement.previousElementSibling)
     }
     else{
         currElement.textContent = "Done"
-    let currChapterName = currElement.previousElementSibling.textContent
-    let currInput = document.createElement("input")
-    currInput.type = "text"
-    currInput.className = "form-control"
-    currInput.placeholder = "Chapter Name"
-    currInput.value = currChapterName
+        let currTodoName = currElement.parentElement.previousElementSibling.textContent
+        let currInput = document.createElement("input")
+        currInput.type = "text"
+        currInput.className = "form-control"
+        currInput.placeholder = "Edit todo"
+        currInput.value = currTodoName
 
-    currElement.parentElement.replaceChild(currInput,currElement.previousElementSibling)
+    currElement.parentElement.parentElement.replaceChild(currInput,currElement.parentElement.previousElementSibling)
     }   
 }
